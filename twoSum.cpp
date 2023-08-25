@@ -13,6 +13,6 @@ public:
             numToIndex[nums[i]] = i;
         }
 
-        return {}; // Return an empty vector if no solution is found
+        return {}; 
     }
 };
