@@ -5,23 +5,16 @@ public:
             return s;
         }
 
-        vector<string> rows(min(numRows, int(s.length())));
-        int currentRow = 0;
-        bool goingDown = false;
-
-        for (char c : s) {
-            rows[currentRow] += c;
-
-            if (currentRow == 0 || currentRow == numRows - 1) {
-                goingDown = !goingDown;
-            }
-
-            currentRow += goingDown ? 1 : -1;
-        }
-
         string result;
-        for (string& row : rows) {
-            result += row;
+        int cycleLen = 2 * numRows - 2;
+
+        for (int i = 0; i < numRows; ++i) {
+            for (int j = 0; j + i < s.length(); j += cycleLen) {
+                result += s[j + i];
+                if (i != 0 && i != numRows - 1 && j + cycleLen - i < s.length()) {
+                    result += s[j + cycleLen - i];
+                }
+            }
         }
 
         return result;
